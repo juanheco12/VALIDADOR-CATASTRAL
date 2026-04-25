@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ValidadorDialogBase</class>
+ <widget class="QDialog" name="ValidadorDialogBase">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>500</width>
+    <height>550</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Validación Catastral - Resolución 1040</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   
+   <item>
+    <widget class="QGroupBox" name="groupBox_Capa">
+     <property name="title">
+      <string>Capa a Procesar</string>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_Layer">
+      <item>
+       <widget class="QLabel" name="label">
+        <property name="text"><string>Capa de Predios:</string></property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QgsMapLayerComboBox" name="cmbLayer"/>
+      </item>
+     </layout>
+    </widget>
+   </item>
+
+   <item>
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="currentIndex">
+      <number>1</number>
+     </property>
+
+     <!-- TAB INDIVIDUAL -->
+     <widget class="QWidget" name="tabIndividual">
+      <attribute name="title">
+       <string>Validación Individual</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QLabel" name="lblInstruccion">
+         <property name="text"><string>Selecciona 1 polígono en QGIS e ingresa sus datos:</string></property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_DatosInd">
+         <property name="title"><string>Datos de Entrada</string></property>
+         <layout class="QFormLayout" name="formLayoutInd">
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_3">
+            <property name="text"><string>Área Jurídica:</string></property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <layout class="QHBoxLayout" name="horizontalLayout">
+            <item>
+             <widget class="QLineEdit" name="txtAreaJuridica">
+              <property name="placeholderText"><string>Ej: 150.5</string></property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="cmbUnidadInd">
+              <item><property name="text"><string>m²</string></property></item>
+              <item><property name="text"><string>Hectáreas</string></property></item>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_4">
+            <property name="text"><string>Tipo de Zona:</string></property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QComboBox" name="cmbZonaInd">
+            <item><property name="text"><string>Urbano o rural con comportamiento urbano</string></property></item>
+            <item><property name="text"><string>Rural sin comportamiento urbano</string></property></item>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnValidarInd">
+         <property name="text"><string>Calcular y Validar Predio Seleccionado</string></property>
+         <property name="minimumSize"><size><width>0</width><height>40</height></size></property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_Resultados">
+         <property name="title"><string>Resultados (m²)</string></property>
+         <layout class="QFormLayout" name="formLayout_2">
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_5"><property name="text"><string>Área Geométrica:</string></property></widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLabel" name="lblAreaGeometrica"><property name="text"><string>0.00</string></property></widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_6"><property name="text"><string>Diferencia Absoluta:</string></property></widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLabel" name="lblDiferencia"><property name="text"><string>0.00</string></property></widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="label_7"><property name="text"><string>Margen de Tolerancia:</string></property></widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLabel" name="lblTolerancia"><property name="text"><string>0.00</string></property></widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="lblResultado">
+         <property name="text"><string>Esperando datos...</string></property>
+         <property name="alignment"><set>Qt::AlignCenter</set></property>
+         <property name="wordWrap"><bool>true</bool></property>
+         <property name="font"><font><weight>75</weight><bold>true</bold><pointsize>12</pointsize></font></property>
+        </widget>
+       </item>
+       <item><spacer name="verticalSpacer1"><property name="orientation"><enum>Qt::Vertical</enum></property></spacer></item>
+      </layout>
+     </widget>
+
+     <!-- TAB MASIVO -->
+     <widget class="QWidget" name="tabMasivo">
+      <attribute name="title">
+       <string>Procesamiento Múltiple</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <widget class="QLabel" name="lblInstruccionMasiva">
+         <property name="text"><string>Se añadirán columnas (area_geom, dif_m2, cumple_1040) a la capa procesando el campo seleccionado.</string></property>
+         <property name="wordWrap"><bool>true</bool></property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_DatosMas">
+         <property name="title"><string>Configuración</string></property>
+         <layout class="QFormLayout" name="formLayoutMas">
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_8">
+            <property name="text"><string>Campo Área Jurídica:</string></property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <layout class="QHBoxLayout" name="horizontalLayout_2">
+            <item>
+             <widget class="QgsFieldComboBox" name="cmbCampoArea"/>
+            </item>
+            <item>
+             <widget class="QComboBox" name="cmbUnidadMas">
+              <item><property name="text"><string>m²</string></property></item>
+              <item><property name="text"><string>Hectáreas</string></property></item>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_9">
+            <property name="text"><string>Tipo de Zona:</string></property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QComboBox" name="cmbZonaMas">
+            <item><property name="text"><string>Urbano o rural con comportamiento urbano</string></property></item>
+            <item><property name="text"><string>Rural sin comportamiento urbano</string></property></item>
+           </widget>
+          </item>
+          
+          <item row="2" column="0">
+           <widget class="QLabel" name="label_10">
+            <property name="text"><string>Alcance:</string></property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QCheckBox" name="chkSoloSeleccionados">
+            <property name="text"><string>Procesar SÓLO los objetos seleccionados</string></property>
+            <property name="checked"><bool>true</bool></property>
+           </widget>
+          </item>
+          
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnValidarMasivo">
+         <property name="text"><string>Iniciar Procesamiento</string></property>
+         <property name="minimumSize"><size><width>0</width><height>40</height></size></property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QProgressBar" name="progressBar">
+         <property name="value"><number>0</number></property>
+         <property name="visible"><bool>false</bool></property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="lblStatusMasivo">
+         <property name="text"><string>Listo para procesar.</string></property>
+         <property name="alignment"><set>Qt::AlignCenter</set></property>
+        </widget>
+       </item>
+       <item><spacer name="verticalSpacer2"><property name="orientation"><enum>Qt::Vertical</enum></property></spacer></item>
+      </layout>
+     </widget>
+
+    </widget>
+   </item>
+
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QgsMapLayerComboBox</class>
+   <extends>QComboBox</extends>
+   <header>qgis.gui</header>
+  </customwidget>
+  <customwidget>
+   <class>QgsFieldComboBox</class>
+   <extends>QComboBox</extends>
+   <header>qgis.gui</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>
